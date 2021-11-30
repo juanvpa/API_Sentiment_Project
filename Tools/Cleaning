@@ -1,0 +1,84 @@
+def insert(df):
+    """
+    Esta función inserta valores dentro de las tablas de SQL directamente desde el dataframe iterando por cada row
+    """
+    for i,row in df.iterrows():
+        engine.execute(f"""
+        INSERT INTO tweet (tweet, year, nlikes, nreplies, nretweets, user_user_id)
+        VALUES ('{row.tweet}',{row.year},{row.nlikes},{row.nreplies},{row.nretweets},1);""")
+
+
+def insert(df):
+    """
+    Esta función inserta valores dentro de las tablas de SQL directamente desde el dataframe iterando por cada row
+    """
+    for i,row in df.iterrows():
+        engine.execute(f"""INSERT INTO user VALUES ('{row.id}','{row.name}','{row.surname}');""")
+
+
+def checkstr(a,string):
+    """
+    Función que revisa en cada tabla si el name, surname y tweet existe o no.
+    Devuelve True o False en función a lo anterior
+    """
+    if a == "tweet":
+        query = list(engine.execute(f"SELECT tweet FROM tweet WHERE tweet = '{string}'"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+    
+    elif a == "name":
+        query = list(engine.execute(f"SELECT name FROM user WHERE name = '{string}'"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+    
+    elif a == "surname":
+        query = list(engine.execute(f"SELECT surname FROM user WHERE surname = '{string}'"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+
+
+def checkint(a, numero):
+    """
+    Función que revisa en cada tabla si el id, year, nlikes, nreplies y nretweets existe o no.
+    Devuelve True o False en función a lo anterior
+    """
+    if a == "id":
+        query = list(engine.execute(f"SELECT id FROM tweet WHERE id = {numero}"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+        
+    elif a == "year":
+        query = list(engine.execute(f"SELECT year FROM tweet WHERE year = {numero}"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+        
+    elif a == "nlikes":
+        query = list(engine.execute(f"SELECT nlikes FROM tweet WHERE nlikes = {numero}"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+        
+    elif a == "nreplies":
+        query = list(engine.execute(f"SELECT nreplies FROM tweet WHERE nreplies = {number}"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
+        
+    elif a == "nretweets":
+        query = list(engine.execute(f"SELECT nretweets FROM tweet WHERE nretweets = {number}"))
+        if len(query) > 0:
+            return True
+        else:
+            return False
